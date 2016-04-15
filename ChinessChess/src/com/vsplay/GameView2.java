@@ -93,6 +93,7 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 	int y2 ;
 	int y3 ;
 	
+	int selectColor = getResources().getColor(R.color.selectColor);
 	
 	// 搜索引擎
 	public MoveGenerator pMG;
@@ -290,9 +291,9 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 		if(focus){
 			if(selectqizi > 0){
 				Paint ppp = new Paint(); 
-			 	ppp.setColor(Color.YELLOW);
+			 	ppp.setColor(selectColor);
 			 	ppp.setStyle(Paint.Style.STROKE); // 变成空心的圆
-			 	ppp.setStrokeWidth(dpvalue * 1); // 设置宽度
+			 	ppp.setStrokeWidth(dpvalue * 3); // 设置宽度
 				canvas.drawCircle(ileft+startJ*itemwidth, itop+startI*itemwidth, radix, ppp);
 //						canvas.drawRect(startX+startJ*colSpan-radix, startY+startI*rowSpan-radix,
 //								startX+startJ*colSpan+radix, startY+startI*rowSpan+radix
@@ -525,7 +526,7 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 									
 									boolean canMove = pMG.IsValidMove(qizi, startJ, startI, endJ, endI);
 									if (canMove) {// 如果可以移动过去
-										isIgo = false;// 不让玩家走了
+										isIgo = false;// 红方不可以走，让黑方走
 										if (qizi[endI][endJ] == Chessconst.B_KING) {
 											this.status = 1 ; // 红方胜利
 										} else {
@@ -558,7 +559,7 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 								//boolean canMove = guiZe.canMove(qizi, startI,startJ, endI, endJ);// 查看是否可走
 								boolean canMove = pMG.IsValidMove(qizi, startJ, startI, endJ, endI);
 								if (canMove) {// 如果可以移动
-									isIgo = false;// 不让玩家走了
+									isIgo = false;// 红方不可以走，让黑方走
 									if (qizi[endI][endJ] == Chessconst.B_KING) {
 										this.status = 1 ; // 红方
 									} else {
@@ -614,7 +615,7 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 									//boolean canMove = guiZe.canMove(qizi,startI, startJ, endI, endJ);
 									boolean canMove = pMG.IsValidMove(qizi, startJ, startI, endJ, endI);
 									if (canMove) {// 如果可以移动过去
-										isIgo = false;// 不让玩家走了
+										isIgo = true;// 黑方不可以走，让红方走
 										if (qizi[endI][endJ] == Chessconst.R_KING) { 
 											this.status = 2 ; //黑方胜利
 										} else {
@@ -646,7 +647,7 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 								//boolean canMove = guiZe.canMove(qizi, startI,startJ, endI, endJ);// 查看是否可走
 								boolean canMove = pMG.IsValidMove(qizi, startJ, startI, endJ, endI);
 								if (canMove) {// 如果可以移动
-									isIgo = true; // 不让玩家走了
+									isIgo = true;// 黑方不可以走，让红方走
 									if (qizi[endI][endJ] == Chessconst.R_KING) {
 										this.status = 2 ; // 黑方胜利
 									} else {

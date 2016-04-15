@@ -47,8 +47,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         ActivityCollector.addActivity(this);
-        
-        
+            
 		//全屏
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN ,  

@@ -17,4 +17,5 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <color name="selectColor">#00ff00</color>
 </resources>

@@ -90,6 +90,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	int y2 ;
 	int y3 ;
 	
+	int selectColor = getResources().getColor(R.color.selectColor);
 	
 	// 搜索引擎
 	public MoveGenerator pMG;
@@ -288,9 +289,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		if(focus){
 			if(selectqizi > 7){
 				Paint ppp = new Paint(); 
-			 	ppp.setColor(Color.YELLOW);
+				
+				ppp.setColor(selectColor);
 			 	ppp.setStyle(Paint.Style.STROKE); // 变成空心的圆
-			 	ppp.setStrokeWidth(dpvalue * 1); // 设置宽度
+			 	ppp.setStrokeWidth(dpvalue * 2); // 设置宽度
 				canvas.drawCircle(ileft+startJ*itemwidth, itop+startI*itemwidth, radix, ppp);
 //						canvas.drawRect(startX+startJ*colSpan-radix, startY+startI*rowSpan-radix,
 //								startX+startJ*colSpan+radix, startY+startI*rowSpan+radix
