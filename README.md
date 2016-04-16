@@ -1,1 +1,1 @@
-# chess
+# Android Chinese Chess
