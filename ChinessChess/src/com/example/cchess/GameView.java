@@ -414,6 +414,27 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			if(status == 1) {// 胜利后
+				if (event.getX() > left + itemwidth*2 && event.getX() < left + itemwidth*2+ok.getWidth()/3+ok.getWidth()
+						&& event.getY() > top + itemwidth*4 + win.getHeight()
+						&& event.getY() < top + itemwidth*4 + win.getHeight() + ok.getHeight() ) { //点击了确定按钮
+					
+					activity.myHandler.sendEmptyMessage(1);// 发送消息，切换到MenuView
+					
+				}else{
+					return false;
+				}
+			}else if (status == 2) {// 失败后
+				if (event.getX() > left + itemwidth*2 && event.getX() < left + itemwidth*2+ok.getWidth()/3+ok.getWidth()
+						&& event.getY() > top + itemwidth*4 + win.getHeight()
+						&& event.getY() < top + itemwidth*4 + win.getHeight() + ok.getHeight() ) { //点击了确定按钮
+					
+					activity.myHandler.sendEmptyMessage(1);// 发送消息，切换到MenuView
+					
+				}else{
+					return false;
+				}
+			}
 			
 			// 按下了声音按钮
 			if (event.getX() > ileft && event.getX() < ileft + sound2.getWidth()
@@ -451,24 +472,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				
 			}
 			
-			
-			if(status == 1) {// 胜利后
-				if (event.getX() > left + itemwidth*2 && event.getX() < left + itemwidth*2+ok.getWidth()/3+ok.getWidth()
-						&& event.getY() > top + itemwidth*4 + win.getHeight()
-						&& event.getY() < top + itemwidth*4 + win.getHeight() + ok.getHeight() ) { //点击了确定按钮
-					
-					activity.myHandler.sendEmptyMessage(1);// 发送消息，切换到MenuView
-					
-				}
-			}else if (status == 2) {// 失败后
-				if (event.getX() > left + itemwidth*2 && event.getX() < left + itemwidth*2+ok.getWidth()/3+ok.getWidth()
-						&& event.getY() > top + itemwidth*4 + win.getHeight()
-						&& event.getY() < top + itemwidth*4 + win.getHeight() + ok.getHeight() ) { //点击了确定按钮
-					
-					activity.myHandler.sendEmptyMessage(1);// 发送消息，切换到MenuView
-					
-				}
-			}
 			
 			/**
 			 * 游戏过程中的逻辑处理
