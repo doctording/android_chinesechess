@@ -17,6 +17,7 @@ public class AlphaBetaEngine extends SearchEngine{
 			}
 		}
 		m_nMaxDepth = m_nSearchDepth; //当前最大深度
+		
 		/*
 		 *  调用算法，得到 BestMove
 		 *  一个负 很大， 一个 正 很大

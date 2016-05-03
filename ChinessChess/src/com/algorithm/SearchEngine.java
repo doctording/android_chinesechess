@@ -2,18 +2,17 @@ package com.algorithm;
 
 public class SearchEngine{
 	
-	// 搜索时用于当前节点棋盘状态的数组
-	int CurPosition[][] = new int[10][9];
-	//记录最佳走法的变量
-	Chessmov m_cmBestMove;
-	// 走法产生器
-	MoveGenerator m_pMG;
-	//估值函数
-	Evaluation m_pEval;
-	//最大搜索深度
-	int m_nSearchDepth;
-	// 当前搜索的最大搜索深度
-	int m_nMaxDepth;
+	int CurPosition[][] = new int[10][9];// 搜索时用于当前节点棋盘状态的数组
+	
+	Chessmov m_cmBestMove; //记录最佳走法的变量
+	
+	MoveGenerator m_pMG; // 走法产生器
+	
+	Evaluation m_pEval; //估值函数
+	
+	int m_nSearchDepth; //最大搜索深度
+	
+	int m_nMaxDepth;// 当前搜索的最大搜索深度
 	
 	/**
 	 * 根据传入的走法,改变棋盘

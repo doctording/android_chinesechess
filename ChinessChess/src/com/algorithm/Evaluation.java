@@ -2,9 +2,7 @@ package com.algorithm;
 
 public class Evaluation {
 	
-	/**
-	 * 定义每种棋子的基本价值
-	 */
+	// 定义每种棋子的基本价值
 	final static int BASEVALUE_PAWN = 100;
 	final static int BASEVALUE_BISHOP = 250;
 	final static int BASEVALUE_ELEPHANT = 250;
@@ -13,10 +11,7 @@ public class Evaluation {
 	final static int BASEVALUE_CANON = 350;
 	final static int BASEVALUE_KING = 10000;
 	
-	/**
-	 * 定义各棋子的灵活性
-	 * 每多一个可走位置应加上的分值
-	 */
+	// 定义各棋子的灵活性 ,每多一个可走位置应加上的分值
 	final static int FLEXIBILITY_PAWN = 15;
 	final static int FLEXIBILITY_BISHOP = 1;
 	final static int FLEXIBILITY_ELEPHANT = 1;
@@ -39,6 +34,7 @@ public class Evaluation {
 		{0,  0,  0,  0,  0,  0,  0,  0,  0},
 		{0,  0,  0,  0,  0,  0,  0,  0,  0},
 	};
+	
 	//黑兵的附加值矩阵
 	final int[][] BA1 = new int[][]
 	{

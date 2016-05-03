@@ -34,7 +34,6 @@ public class NegamaxEngine extends SearchEngine{
 	{
 		int current = -20000 ;
 		int i;
-
 		i = IsGameOver(CurPosition, depth);
 		if (i != 0)
 			return i;
