@@ -126,11 +126,7 @@ public class Evaluation {
 		int nChessType, nTargetType;
 		count ++;
 
-		/*memset(m_chessValue,0, 360);
-		memset(m_AttackPos,0, 180); 
-		memset(m_GuardPos,0, 90); 
-		memset(m_FlexibilityPos, 0, 90);*/
-		for(i=0;i<10;i++){
+		for(i=0;i<10;i++){ // 初始化数值
 			for(j=0;j<9;j++){
 				m_chessValue[i][j] = 0 ;
 				m_AttackPos[i][j] = 0 ;
