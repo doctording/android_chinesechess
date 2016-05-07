@@ -2,6 +2,8 @@ package com.example.cchess;
 
 import java.util.List;
 
+import simple.game.chess.Chess_Status;
+
 import com.algorithm.AlphaBetaEngine;
 import com.algorithm.Chessconst;
 import com.algorithm.Chessmov;
@@ -92,10 +94,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	int selectColor = getResources().getColor(R.color.selectColor);
 	
-	// 搜索引擎
+	// 搜索引擎 评估函数
 	public MoveGenerator pMG;
 	public Evaluation pEvel;
 	public AlphaBetaEngine pSE;
+	
+	public ModelChessmov last_black_mov=null;
 	
 	public GameView(Context context) {
 		super(context);
@@ -285,6 +289,24 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			}
 		}
 		
+		// 显示黑方上一次走步的选择颜色
+		Paint ppp2 = new Paint(); 
+	 	ppp2.setStyle(Paint.Style.STROKE); // 变成空心的圆
+	 	ppp2.setStrokeWidth(dpvalue * 2); // 设置宽度
+	 	
+		if(last_black_mov != null){
+			int xx = last_black_mov.fromX;
+			int yy = last_black_mov.fromY;
+			ppp2.setColor(selectColor);
+			canvas.drawCircle(ileft+yy*itemwidth, itop+xx*itemwidth, radix,ppp2);
+			
+			xx = last_black_mov.toX;
+			yy = last_black_mov.toY;
+			ppp2.setColor(Color.BLUE);
+			canvas.drawCircle(ileft+yy*itemwidth, itop+xx*itemwidth, radix,ppp2);
+		}
+		
+		
 		// 自己选中的,要走的棋子
 		if(focus){
 			if(selectqizi > 7){
@@ -338,9 +360,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					pc.setStyle(Paint.Style.STROKE); // 变成空心的圆
 					pc.setStrokeWidth(dpvalue * 1); // 设置宽度
 					pc.setColor(Color.BLUE);
+					
 					for(int k=0;k<mg.m_nMoveCount;k++){
 						canvas.drawCircle(ileft+mg.m_MoveList[0][k].To.x*itemwidth,
-							itop+mg.m_MoveList[0][k].To.y*itemwidth, radix, pc);
+							itop+mg.m_MoveList[0][k].To.y*itemwidth, radix/2, pc);
 					}
 
 				}
@@ -549,6 +572,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 													cm.chessId2,cm.To.y,cm.To.x );
 											chessmovModelManager.chessmov_insertChessmov(mc2);
 											
+											last_black_mov = mc2 ;
 											
 											if(cm.chessId2 == Chessconst.R_KING){
 												this.status = 2;
@@ -600,6 +624,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 												cm.chessId2,cm.To.y,cm.To.x);
 										chessmovModelManager.chessmov_insertChessmov(mc2);
 										
+										last_black_mov = mc2 ;
 										
 										if(cm.chessId2 == Chessconst.R_KING){
 											this.status = 2;

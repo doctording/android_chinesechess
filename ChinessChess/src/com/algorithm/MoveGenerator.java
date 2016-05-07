@@ -156,7 +156,7 @@ public class MoveGenerator{
 							return false;
 				}
 			}
-			
+
 			break;
 			
 		case Chessconst.B_HORSE:   // 黑马 

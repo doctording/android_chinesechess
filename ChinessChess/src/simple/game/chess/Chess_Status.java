@@ -79,5 +79,4 @@ public class Chess_Status implements Serializable {
 		this.message = message;
 	}
 	
-
 }

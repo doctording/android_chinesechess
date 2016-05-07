@@ -25,7 +25,7 @@ public class TwoVSActivity extends Activity {
 		ActivityCollector.addActivity(this);
 		
 		init();
-		btn_bluetooth.setOnClickListener(new OnClickListener() {
+		btn_bluetooth.setOnClickListener(new OnClickListener() { // 蓝牙对战
 			
 			@Override
 			public void onClick(View arg0) {
@@ -35,7 +35,7 @@ public class TwoVSActivity extends Activity {
 				
 			}
 		});
-		btn_socket.setOnClickListener(new OnClickListener() {
+		btn_socket.setOnClickListener(new OnClickListener() { // socket对战
 			
 			@Override
 			public void onClick(View arg0) {

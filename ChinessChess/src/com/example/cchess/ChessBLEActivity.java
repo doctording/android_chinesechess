@@ -112,7 +112,6 @@ public class ChessBLEActivity extends Activity {
 					sendMessage(msg); 
 					
 					chess.setLastAction(null, null);
-
 				}
 			}
 		});

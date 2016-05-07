@@ -1,17 +1,15 @@
 package mysocket.client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+//服务端
+public class Server { 
 	public static boolean isWaitting = false;
 	public static ConnectCallBack callback;
-	static int port = 2000 ;
-	// 构造一个服务端 端口号为2000,并返回等待的客户端socket
+	public static int port = 8888 ;
+
 	public static Socket StartServer() {
 
 		ServerSocket serverSocket = null;
@@ -21,7 +19,7 @@ public class Server {
 			serverSocket = new ServerSocket(port);
 			isWaitting = true;
 			while (client == null) {
-				client = serverSocket.accept();
+				client = serverSocket.accept(); // 等待客户端的连接
 			}
 
 		} catch (IOException e) {
@@ -38,8 +36,7 @@ public class Server {
 				callback = null;
 			}
 		}
-		// 每一个SOcket就是一个用户
-		return client;
+		return client; // 返回客户端
 	}
 
 	public interface ConnectCallBack {

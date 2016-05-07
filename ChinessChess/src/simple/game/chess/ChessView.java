@@ -30,10 +30,10 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 	private Context context;
 	private SurfaceHolder holder;// 定义surfacehold
 	private MyThread myThread;// 自定义线程
-	static boolean isrun;// 蛇是否在跑
+	
 	static boolean isgo;// 线程是否开启
 	static int timer;// 定义刷新时间
-	//private Random random = new Random();// 定义随机数
+
 	int oldx, oldy;// 保存上次点击的坐标
 	int width;// 界面宽度（右边界）
 	int height;// 界面高度（下边界）
@@ -46,11 +46,7 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 	private boolean canClick;
 	
 	private Chess_Item_Base lastitem,newitem;
-	/**
-	 * 构造函数
-	 * 
-	 * @param context
-	 */
+	
 	public ChessView(Context context) {
 		this(context, null);
 	}
@@ -142,7 +138,7 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 	public void surfaceCreated(SurfaceHolder holder) {
 		
 		initdata();// 初始化数据
-		isrun = true;// 停止跑动
+		//isrun = true;// 停止跑动
 		isgo = true;// 线程开启
 		timer = 50;//刷新的时间
 		if(!myThread.isAlive())
@@ -187,7 +183,6 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 	 */
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		isrun = false;
 		isgo = false;
 	}
 
@@ -233,7 +228,7 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 	 * 
 	 */
 	class MyThread extends Thread {
-		private SurfaceHolder hold;// 新建surfaceholder对象
+		private SurfaceHolder hold; // 新建surfaceholder对象
 
 		/**
 		 * 构造函数，初始化数据
@@ -242,7 +237,6 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 		 */
 		public MyThread(SurfaceHolder hold) {
 			this.hold = hold;
-			ChessView.isrun = true;
 			ChessView.isgo = true;
 		}
 
@@ -251,15 +245,13 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 			Canvas c = null;// 创建画布
 			oodraw(c);// 绘制
 			while (ChessView.isgo)// 只要游戏未结束，就一直画图
-				if (ChessView.isrun) {
-					try {
-						c = holder.lockCanvas();// 锁定画布，一般在锁定后就可以通过其返回的画布对象Canvas，在其上面画图等操作了。
+				try {
+					c = holder.lockCanvas();// 锁定画布，一般在锁定后就可以通过其返回的画布对象Canvas，在其上面画图等操作了。
 
-						oodraw(c);// 绘图
-						Thread.sleep(ChessView.timer);// 睡眠一段时间
-					} catch (Exception ex) {
-					} finally {
-					}
+					oodraw(c);// 绘图
+					Thread.sleep(ChessView.timer);// 睡眠一段时间
+				} catch (Exception ex) {
+				} finally {
 				}
 		}
 		
@@ -355,13 +347,15 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		p.setStyle(Paint.Style.STROKE);
 
-		p.setStrokeWidth(dpvalue * 2); // 设置宽度
+		// 设置棋子走动后的圆圈和颜色
+		p.setStrokeWidth(dpvalue * 2);
 		if(lastitem!=null&&newitem!=null)
 		{
 			c.drawCircle(ileft + lastitem.getCentx() * itemwidth,
 					itop + lastitem.getCenty() * itemwidth, itemwidth/2 , p);
 			c.drawCircle(ileft + newitem.getCentx() * itemwidth,
-					itop + newitem.getCenty() * itemwidth, itemwidth/2 , p);
+				itop + newitem.getCenty() * itemwidth, itemwidth/2 , p);
+			
 			if (items.get(0).isFirst()) {
 				p.setColor(Color.BLACK);
 			} else {
@@ -384,7 +378,7 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 								break;
 						}
 						c.drawCircle(ileft + clickx * itemwidth, itop + clicky
-								* itemwidth, itemwidth / 2, p);
+								* itemwidth, itemwidth/2, p);
 						drawSteps(c, p, item);
 
 						temp = item;
@@ -408,10 +402,10 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 					return true;
 			}
 
-			Log.e("err", "temp no inside");
+			//Log.e("err", "temp no inside");
 			return false;
 		}
-		Log.e("err", "temp is null");
+		//Log.e("err", "temp is null");
 		return false;
 	}
 	

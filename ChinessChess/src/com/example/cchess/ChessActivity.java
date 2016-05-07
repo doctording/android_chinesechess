@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ChessActivity extends Activity {
+	
 	private ChessView chess;
 	private TextView tx_ip,tx_status;
 	private MySocket socket;
@@ -47,9 +48,9 @@ public class ChessActivity extends Activity {
 		chess.change();
 		tx_ip = (TextView) findViewById(R.id.tx_ip);
 		tx_status = (TextView) findViewById(R.id.tx_status);
-		btn_getconnect = (Button) findViewById(R.id.btn_getconnect);
+		btn_getconnect = (Button) findViewById(R.id.btn_getconnect);// 设为服务端
 		btn_change = (Button) findViewById(R.id.btn_change);
-		btn_connect= (Button) findViewById(R.id.btn_connect);
+		btn_connect= (Button) findViewById(R.id.btn_connect); // 客户端 要去连接服务端
 		tx_ip.setText("我的ip:" + AddressGetter.GetIp()); // 显示IP地址
 		
 		chess.setLisenner(new onStepLisenner() {
@@ -188,18 +189,20 @@ public class ChessActivity extends Activity {
 				tx_status.setText("当前状态:开始游戏");
 			}
 			break;
+			
 		//等待连接
 		case R.id.btn_getconnect:
 			tx_status.setText("当前状态:正在等待连接...");
 			btn_getconnect.setEnabled(false);
 			btn_connect.setEnabled(false);
 			socket = new MySocket();
+			
 			new Thread(new Runnable() {
-
 				@Override
 				public void run() {
-
-					if(Server.isWaitting)//避免重复等待造成异常退出
+					
+					// 如果仍然在等待，则发出对应的消息后退出该方法
+					if(Server.isWaitting) //避免重复等待造成异常退出
 					{
 						Server.callback=new ConnectCallBack() {
 							
@@ -230,42 +233,40 @@ public class ChessActivity extends Activity {
 										btn_getconnect.setEnabled(false);
 									}
 								});
-								
-								;
 							}
 						};
 						return;
 					}
 					
-					Socket socketconn = Server.StartServer();
+					// socketconn为 连接到的客户端
+					Socket socketconn = Server.StartServer(); // 开启Socket服务端
 					
-					socket.setSocket(socketconn);
-					socket.SetConSocket();
-					socket.setSocetCallBack(callback);
+					socket.setSocket(socketconn); // 设置客户端
+					socket.SetConSocket(); //客户端设置得到服务端消息 处理连接
+					socket.setSocetCallBack(callback);//客户端回调消息处理
 					hasconn = true;
+					
 					try {
 						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					
-					Chess_Status status = new Chess_Status();
+					Chess_Status status = new Chess_Status(); //传输的棋子一步移动的数据
 					status.setConn(true);
 					status.setMessage("");
 					socket.SendMessage(JsonBeanUtil.toJson(status).getBytes());
 					
-					runOnUiThread(new Runnable() {
+					// Activity.runOnUiThread(Runnable)把更新ui的代码创建在Runnable中，然后在需要更新 ui时，把这个Runnable对象传给Activity.runOnUiThread(Runnable)。 这样Runnable对像就能在ui程序中被调用。
+					runOnUiThread(new Runnable() { //新的UI更新线程
 						public void run() {
 							
-							Toast.makeText(ChessActivity.this,
-									"连接成功，选中红方请点击换边", 200).show();
+							Toast.makeText(ChessActivity.this,"连接成功，选中红方请点击换边", 200).show();
 
 							tx_status.setText("当前状态:连接成功，选中红方请点击换边");
 							btn_getconnect.setEnabled(false);
 						}
 					});
-					
-					;
 				}
 			}).start();
 
@@ -290,8 +291,8 @@ public class ChessActivity extends Activity {
 
 						@Override
 						public void onBtn1CallBack() {
-							socket = new MySocket(text.getText().toString());
-							socket.linkto();
+							socket = new MySocket(text.getText().toString()); // 客户端主动去连接服务端
+							socket.linkto();// 
 							socket.setSocetCallBack(callback);
 				
 							btn_connect.setEnabled(false);
