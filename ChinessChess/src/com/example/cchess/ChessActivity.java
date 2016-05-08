@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -278,7 +279,8 @@ public class ChessActivity extends Activity {
 			btn_getconnect.setEnabled(false);
 			btn_connect.setEnabled(false);
 			ActivityHelper helper = new ActivityHelper(this);
-			final EditText text = new EditText(this);
+			final EditText text = new EditText(this);// 输入IP框
+			text.setInputType(EditorInfo.TYPE_CLASS_PHONE);// 设置输入为数字，小数点
 			text.setText(AddressGetter.GetIp());
 			text.setSelection(AddressGetter.GetIp().length());
 			helper.openDialogWithDefaultStyle("连接到ip", "", "确定", "", text,
