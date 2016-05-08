@@ -203,7 +203,7 @@ public class ChessView extends SurfaceView implements SurfaceHolder.Callback {
 		rectWidth = minl - left * 2;
 		itemwidth = (rectWidth - left / 2) / 8;
 		rectHeight = itemwidth * 9 + left / 2;
-		top = (height - rectHeight) / 2;
+		top = (height - rectHeight) / 2 + itemwidth/3;
 		itop = top + left / 4;
 		ileft = left + left / 4;
 	}

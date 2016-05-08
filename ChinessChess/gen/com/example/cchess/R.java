@@ -57,6 +57,7 @@ public final class R {
         public static final int vs_win=0x7f02001e;
         public static final int win_hei=0x7f02001f;
         public static final int win_hong=0x7f020020;
+        public static final int yellow_bg=0x7f020021;
     }
     public static final class id {
         public static final int action_settings=0x7f0a000e;

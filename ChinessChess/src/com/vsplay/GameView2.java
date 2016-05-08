@@ -350,7 +350,7 @@ public class GameView2 extends SurfaceView implements SurfaceHolder.Callback {
 					pc.setColor(Color.BLUE);
 					for(int k=0;k<mg.m_nMoveCount;k++){
 						canvas.drawCircle(ileft+mg.m_MoveList[0][k].To.x*itemwidth,
-							itop+mg.m_MoveList[0][k].To.y*itemwidth, radix, pc);
+							itop+mg.m_MoveList[0][k].To.y*itemwidth, radix/2, pc);
 					}
 
 				}

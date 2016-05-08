@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick"
+        android:background="@drawable/yellow_bg"
         android:text="抢红旗" />
 
     <TextView
@@ -40,6 +41,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:onClick="onClick"
+         android:background="@drawable/yellow_bg"
         android:text="催一催" />
 
 </RelativeLayout>
