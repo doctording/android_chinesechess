@@ -124,6 +124,8 @@ public class ChessDeviceChoiesActivity  extends Activity {
 				item.setStatus(device.getBondState()==12?"已连接":"未连接");
 				list.add(item);
 			}
+		}else{
+			Toast.makeText(this, "还未发现其它蓝牙设备，请返回重试", Toast.LENGTH_LONG).show();
 		}
 	}
 	
